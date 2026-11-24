@@ -28,10 +28,37 @@ AI理財學習教練
 - 學習紀錄與能力回饋： 記錄學習歷程、案例作答及常見觀念錯誤，提供個人化學習建議。
 
 ## 4. 系統流程
-```mermaid
 flowchart TD
-    A["使用者進入系統"] --> B["選擇學習方式"]
-    B --> C["AI 引導式學習"]
+    %% 樣式定義
+    classDef startEnd fill:#f5ebe0,stroke:#8d6e63,stroke-width:2px,color:#3e2723,font-weight:bold
+    classDef decision fill:#fff3cd,stroke:#d4a373,stroke-width:2px,color:#5c4033,font-weight:bold
+    classDef aiNode fill:#e8f4f8,stroke:#457b9d,stroke-width:1.5px,color:#1d3557
+    classDef userNode fill:#e9f5db,stroke:#718355,stroke-width:1.5px,color:#2b3a1e
+    classDef safetyNode fill:#fde2e4,stroke:#e56b6f,stroke-width:1.5px,color:#6d1a26,font-weight:bold
+
+    A(["① 進入 AI 理財學習教練"]):::startEnd --> B{"② 選擇學習路徑"}:::decision
+
+    %% 路徑一：自由提問
+    B -->|自由提問| C["③-A AI 理財即時問答"]:::aiNode
+    C --> F["④ AI 知識解釋與概念回饋"]:::aiNode
+
+    %% 路徑二：主題學習（加入子區塊凸顯鷹架流程）
+    subgraph Guided ["主題式決策鷹架路徑"]
+        direction TB
+        D["③-B AI 引導式提問<br/>釐清目標與風險承受度"]:::aiNode --> E["投資情境與案例解析"]:::aiNode
+        E --> G["使用者模擬分析與決策"]:::userNode
+    end
+
+    B -->|主題學習| D
+    G --> F
+
+    %% 收斂與安全把關
+    F --> H["⑤ 資訊查證與 AI 幻覺提醒<br/>（強調非投資建議）"]:::safetyNode
+    H --> I["⑥ 生成學習紀錄與成效回饋"]:::aiNode
+    I --> J{"⑦ 是否繼續學習？"}:::decision
+
+    J -->|是，切換或延伸主題| B
+    J -->|否，結束練習| K(["⑧ 完成本次理財學習"]):::startEnd
 
 ## 5. 實作範圍
 
