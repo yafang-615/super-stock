@@ -87,7 +87,7 @@ flowchart TD
     B <--> E
 ```
 
-| 層級 | 使用技術 | 說明 |
+| 架構層 | 使用技術 | 說明 |
 | --- | --- | --- |
 | 前端 | HTML、CSS、JavaScript（原生） | 建立理財學習介面，支援電腦與平板操作 |
 | 後端 | Vercel Functions | 處理前端請求、串接 AI API，保護 API 金鑰 |
