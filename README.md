@@ -61,24 +61,42 @@ flowchart TD
     J -->|是，切換或延伸主題| B
     J -->|否，結束練習| K(["⑧ 完成本次理財學習"]):::startEnd
 ```
-## 5. 實作範圍
+## 5. 系統模組
 
-| 項目 | 第一版（期末完成） | 未來擴充 |
-| --- | --- | --- |
-| 年級與單元 | 暫定：三年級「三位數加減直式（進退位）」 | 擴充到其他年級與單元 |
-| 情緒偵測 | 表情圖卡／情境選擇 | 語音情緒偵測 |
-| 小老師糾正 | 點選錯誤位置＋文字說明 | 語音說明（瀏覽器內建 Web Speech API） |
-| 答案判斷 | 程式計算（不交給 AI） | — |
-
-> 為什麼先不做語音情緒偵測？準確度不穩定，而且會蒐集兒童聲音，個資風險較高。
+- 使用者互動模組：提供對話介面、學習主題選擇及案例操作。
+- AI 對話教練模組：運用大型語言模型進行自然語言理解、提問及個人化教學。
+- 案例學習模組：管理投資情境、案例題目與學習回饋。
+- 資訊查證模組：結合可信資料來源、知識檢索及不確定性提示，降低錯誤資訊造成的誤導。
+- 學習管理模組：儲存學習紀錄、作答結果及學習進度。
 
 ## 6. 技術架構
 
 ```mermaid
 flowchart LR
-    U["學生的瀏覽器<br/>（前端網頁）"] -->|只送題目與孩子的文字| F["Vercel Functions<br/>（後端代理）"]
-    F -->|金鑰只存在這裡| G["Google Gemini API"]
-    G --> F --> U
+    %% 樣式定義
+    classDef client fill:#e9f5db,stroke:#718355,stroke-width:2px,color:#2b3a1e,font-weight:bold
+    classDef server fill:#e8f4f8,stroke:#457b9d,stroke-width:2px,color:#1d3557,font-weight:bold
+    classDef ai fill:#fff3cd,stroke:#d4a373,stroke-width:2px,color:#5c4033,font-weight:bold
+    classDef devops fill:#f5ebe0,stroke:#8d6e63,stroke-width:1.5px,color:#3e2723
+
+    %% 系統執行層級
+    subgraph Runtime ["系統運行架構（即時互動流）"]
+        direction LR
+        FE["<b>前端介面</b><br/>HTML / CSS / 原生 JS<br/>（跨裝置支援平板與電腦）"]:::client
+        BE["<b>後端代理層</b><br/>Vercel Functions<br/>（轉發請求、隱藏並保護 API 金鑰）"]:::server
+        AI["<b>AI 核心引擎</b><br/>Google Gemini API<br/>（生成慢速鷹架提示與笨笨機器人對話）"]:::ai
+
+        FE <-->|HTTPS 請求與回應| BE
+        BE <-->|安全帶入金鑰呼叫| AI
+    end
+
+    %% 自動部署層級
+    subgraph Deploy ["自動化部署流程（CI/CD）"]
+        direction LR
+        GH["<b>GitHub 儲存庫</b><br/>程式碼版本控制"]:::devops -->|git push 觸發| VC["<b>Vercel 雲端平台</b><br/>自動建置與網站更新"]:::devops
+    end
+
+    VC -.->|託管並發布最新網站| FE
 ```
 
 | 層級 | 使用技術 | 說明 |
