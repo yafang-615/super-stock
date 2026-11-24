@@ -28,6 +28,7 @@ AI理財學習教練
 - 學習紀錄與能力回饋： 記錄學習歷程、案例作答及常見觀念錯誤，提供個人化學習建議。
 
 ## 4. 系統流程
+```mermaid
 flowchart TD
     %% 樣式定義
     classDef startEnd fill:#f5ebe0,stroke:#8d6e63,stroke-width:2px,color:#3e2723,font-weight:bold
@@ -59,7 +60,7 @@ flowchart TD
 
     J -->|是，切換或延伸主題| B
     J -->|否，結束練習| K(["⑧ 完成本次理財學習"]):::startEnd
-
+```
 ## 5. 實作範圍
 
 | 項目 | 第一版（期末完成） | 未來擴充 |
