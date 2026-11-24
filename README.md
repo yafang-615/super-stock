@@ -71,8 +71,21 @@ flowchart TD
 
 ## 6. 技術架構
 
+```mermaid
+flowchart TD
+    A["前端<br/>Web UI／LINE Bot"]
+    B["後端<br/>Python、Flask"]
+    C["AI<br/>LLM API、Prompt Engineering"]
+    D["知識檢索<br/>RAG（檢索增強生成）"]
+    E["資料庫<br/>MySQL／SQLite"]
+    F["資訊來源<br/>政府金融教育資源及可信金融機構公開資料"]
 
-## 技術架構
+    A --> B
+    B --> C
+    C <--> D
+    D <--> F
+    B <--> E
+```
 
 | 層級 | 使用技術 | 說明 |
 | --- | --- | --- |
@@ -87,10 +100,10 @@ flowchart TD
 
 | 組員 | 主要工作 |
 | --- |--- |
-| 莊維仁 | ① ② ③ | 
-| 郭雅芳 | ① ② ③ | 
-| 李科翰 | ① ② ③ | 
-| 許安杰 | ① ② ③ |
+| 莊維仁 |  | 
+| 郭雅芳 |  | 
+| 李科翰 |  | 
+| 許安杰 |  |
 
 ## 資料夾結構
 
