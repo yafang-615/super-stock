@@ -71,28 +71,6 @@ flowchart TD
 
 ## 6. 技術架構
 
-## 系統流程
-
-```mermaid
-flowchart TD
-    A["① 使用者進入 AI 理財學習教練"] --> B{"② 選擇學習方式"}
-
-    B -->|自由提問| C["AI 理財問答"]
-    B -->|主題學習| D["AI 引導式提問"]
-
-    D --> E["投資案例教學<br/>股票、ETF、基金"]
-    E --> F["使用者分析與決策"]
-
-    C --> G["AI 知識解釋與回饋"]
-    F --> G
-
-    G --> H["資訊查證與幻覺提醒<br/>來源標示、不確定性提示"]
-    H --> I["學習紀錄與成效回饋"]
-
-    I --> J{"是否繼續學習？"}
-    J -->|是| B
-    J -->|否| K["完成本次學習"]
-```
 
 ## 技術架構
 
@@ -105,69 +83,14 @@ flowchart TD
 | 資料庫 | Supabase / SQLite | 儲存使用者學習紀錄、案例作答與學習進度 |
 | 部署 | Vercel（連結 GitHub 儲存庫） | 推送程式碼後自動部署，更新網站 |
 
-## 7. 預期成效與評估方式（暫定）
+## 8. 組員分工
 
-| 研究問題 | 評估方式 |
-| --- | --- |
-| RQ1：使用系統後，學生的數學焦慮是否下降？ | 使用前後的心情 Check-in 紀錄、數學焦慮量表 |
-| RQ2：學生的單元解題正確率是否提升？ | 前後測 |
-| RQ3：學生「我做得到」的自信是否提升？ | 數學自我效能問卷、小老師挑戰的成功率 |
-
-## 8. 個資與資料保護
-
-- 學生一律使用**代號**（班級代號＋座號，例如 30105），不蒐集姓名。
-- 只蒐集達成研究目的的最少資料：代號、心情選項、作答紀錄。
-- 情緒資料屬於敏感資料，**活動結束後即刪除**。
-- 使用 Google Gemini 屬於資料委外處理；到班試用前，會先向學校資安窗口報備，並取得家長同意。
-
-## 9. 時程規劃（暫定，依課程期限調整）
-
-| 階段 | 工作內容 |
-| --- | --- |
-| 第 1–2 週 | 確定年級單元、整理迷思錯誤清單、設計畫面草圖 |
-| 第 3–5 週 | 三個模組分頭開發，並約定模組之間的資料格式 |
-| 第 6–7 週 | 串接三部曲流程、串接 Gemini API |
-| 第 8 週 | 小規模試用與修正 |
-| 第 9 週 | 整理成果、期末報告 |
-
-## 10. 組員分工
-
-| 組員 | 負責模組 | 主要工作 |
-| --- | --- | --- |
-| 余玟靜 | ① 情緒 Check-in | 情緒選項設計、安撫話術、前後心情比較 |
-| 呂佳蓁 | ② 慢速鷹架解題 | 引導提問設計、提示分級、卡關判斷 |
-| 張祐誠 | ③ 笨笨小老師挑戰 | 迷思錯誤設計、笨笨機器人對話、Gemini 串接 |
-| 待定 | 系統整合 | 三個模組的資料串接、部署 |
-
-## 11. 參考文獻（引用前請再核對原文）
-
-> 近五年 SSCI 論文與相關專利（不限年份）整理，請見 [docs/文獻與專利.md](docs/文獻與專利.md)。
-
-**經典理論文獻**
-
-- Adams, D. M., et al. (2014). Using erroneous examples to improve mathematics learning with a web-based tutoring system. *Computers in Human Behavior, 36*, 401–411.
-- Ashcraft, M. H. (2002). Math anxiety: Personal, educational, and cognitive consequences. *Current Directions in Psychological Science, 11*(5), 181–185.
-- Biswas, G., Leelawong, K., Schwartz, D., Vye, N., & TAG-V. (2005). Learning by teaching: A new agent paradigm for educational software. *Applied Artificial Intelligence, 19*(3–4), 363–392.
-- CASEL. *What is the CASEL framework?* https://casel.org/
-- Chase, C. C., Chin, D. B., Oppezzo, M. A., & Schwartz, D. L. (2009). Teachable agents and the protégé effect: Increasing the effort towards learning. *Journal of Science Education and Technology, 18*(4), 334–352.
-- Vygotsky, L. S. (1978). *Mind in society: The development of higher psychological processes*. Harvard University Press.
-- Wood, D., Bruner, J. S., & Ross, G. (1976). The role of tutoring in problem solving. *Journal of Child Psychology and Psychiatry, 17*(2), 89–100.
-
----
+| 組員 | 主要工作 |
+| --- |--- |
+| 莊維仁 | ① ② ③ | 
+| 郭雅芳 | ① ② ③ | 
+| 李科翰 | ① ② ③ | 
+| 許安杰 | ① ② ③ |
 
 ## 資料夾結構
 
-```
-team-work/
-├── docs/           文件、會議紀錄、簡報摘要、文獻與專利整理
-├── .env.example    環境變數範本（複製成 .env 後自行填寫）
-├── .gitignore      不上傳到 GitHub 的檔案清單
-└── README.md       專題計畫書（就是這份）
-```
-
-## 協作規則
-
-- 動手前先 `git pull`，取得組員最新的修改。
-- 提交前先 `git status`，確認沒有 `.env` 或金鑰檔。
-- commit 訊息用中文簡短寫清楚「改了什麼」，例如：`新增情緒 Check-in 畫面`。
-- 本儲存庫為公開（Public），**不可放入金鑰、密碼或學生個資**。
