@@ -71,47 +71,16 @@ flowchart TD
 
 ## 6. 技術架構
 
-```mermaid
-flowchart LR
-    %% 樣式定義
-    classDef client fill:#e9f5db,stroke:#718355,stroke-width:2px,color:#2b3a1e,font-weight:bold
-    classDef server fill:#e8f4f8,stroke:#457b9d,stroke-width:2px,color:#1d3557,font-weight:bold
-    classDef ai fill:#fff3cd,stroke:#d4a373,stroke-width:2px,color:#5c4033,font-weight:bold
-    classDef devops fill:#f5ebe0,stroke:#8d6e63,stroke-width:1.5px,color:#3e2723
-
-    %% 系統執行層級
-    subgraph Runtime ["系統運行架構（即時互動流）"]
-        direction LR
-        FE["<b>前端介面</b><br/>HTML / CSS / 原生 JS<br/>（跨裝置支援平板與電腦）"]:::client
-        BE["<b>後端代理層</b><br/>Vercel Functions<br/>（轉發請求、隱藏並保護 API 金鑰）"]:::server
-        AI["<b>AI 核心引擎</b><br/>Google Gemini API<br/>（生成慢速鷹架提示與笨笨機器人對話）"]:::ai
-
-        FE <-->|HTTPS 請求與回應| BE
-        BE <-->|安全帶入金鑰呼叫| AI
-    end
-
-    %% 自動部署層級
-    subgraph Deploy ["自動化部署流程（CI/CD）"]
-        direction LR
-        GH["<b>GitHub 儲存庫</b><br/>程式碼版本控制"]:::devops -->|git push 觸發| VC["<b>Vercel 雲端平台</b><br/>自動建置與網站更新"]:::devops
-    end
-
-    VC -.->|託管並發布最新網站| FE
-```
-
+## 技術架構
 
 | 層級 | 使用技術 | 說明 |
 | --- | --- | --- |
-| 前端 | HTML、CSS、JavaScript（原生） | 不使用大型框架，平板與電腦都能開 |
-| 後端 | Vercel Functions | 代替前端呼叫 AI，保護金鑰 |
-| AI | Google Gemini API | 產生慢速提示與笨笨機器人的對話 |
-| 部署 | Vercel（連結本 GitHub 儲存庫） | 推送程式後自動更新網站 |
-
-**金鑰安全**
-
-- 本儲存庫是公開的，**Gemini 金鑰不可寫在程式碼或前端網頁裡**。
-- 金鑰設定在 Vercel 後台的環境變數 `GEMINI_API_KEY`；本機測試時放在 `.env`（已列入 `.gitignore`）。
-- 在 Google AI Studio 設定用量上限，避免網址被濫用導致額度耗盡。
+| 前端 | HTML、CSS、JavaScript（原生） | 建立理財學習介面，支援電腦與平板操作 |
+| 後端 | Vercel Functions | 處理前端請求、串接 AI API，保護 API 金鑰 |
+| AI | Google Gemini API | 提供 AI 理財問答、引導式提問、案例教學與學習回饋 |
+| 知識檢索 | RAG（檢索增強生成） | 從可信賴的金融教育資料中檢索資訊，輔助 AI 回答並提供參考來源 |
+| 資料庫 | Supabase / SQLite | 儲存使用者學習紀錄、案例作答與學習進度 |
+| 部署 | Vercel（連結 GitHub 儲存庫） | 推送程式碼後自動部署，更新網站 |
 
 ## 7. 預期成效與評估方式（暫定）
 
